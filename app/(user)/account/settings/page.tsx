@@ -8,7 +8,8 @@ import { getServerSession } from 'next-auth/next'
 import { redirect } from 'next/navigation'
 import EditProfileForm from '@/components/forms/EditProfile'
 import PasswordForm from '@/components/forms/Password'
-import TawkToChat from '@/components/TawkTo'
+import TidioChat from '@/components/TidioChat'
+// import TawkToChat from '@/components/TawkTo'
 
 const Settings = async() => {
     const api = process.env.API_ROOT;
@@ -43,7 +44,8 @@ const Settings = async() => {
                     <p className='text-gray-700 text-sm text-center'>copyright&copy; botexFinance 2024</p>
                 </footer>
             </main>
-            <TawkToChat />
+            <TidioChat />
+            {/* <TawkToChat /> */}
         </section>
     )
 }

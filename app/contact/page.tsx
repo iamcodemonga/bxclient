@@ -4,7 +4,8 @@ import Navbar from '@/components/Navbar'
 
 import { authOptions } from '../api/auth/[...nextauth]/options'
 import { getServerSession } from 'next-auth'
-import TawkToChat from '@/components/TawkTo'
+import TidioChat from '@/components/TidioChat'
+// import TawkToChat from '@/components/TawkTo'
 
 const Contact = async() => {
     let user: string | null = null;
@@ -71,7 +72,8 @@ const Contact = async() => {
                     </div>
                 </div>
             </section>
-            <TawkToChat />
+            <TidioChat />
+            {/* <TawkToChat /> */}
             <Footer />
         </main>
     )

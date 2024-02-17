@@ -10,7 +10,8 @@ import Banner from '@/components/Banner'
 
 import { authOptions } from '../api/auth/[...nextauth]/options'
 import { getServerSession } from 'next-auth'
-import TawkToChat from '@/components/TawkTo'
+import TidioChat from '@/components/TidioChat'
+// import TawkToChat from '@/components/TawkTo'
 
 const About = async() => {
     let user: string | null = null;
@@ -29,7 +30,8 @@ const About = async() => {
             <HowItWorks />
             <FAQS />
             <Testimony />
-            <TawkToChat />
+            <TidioChat />
+            {/* <TawkToChat /> */}
             <Footer />
         </main>
     )

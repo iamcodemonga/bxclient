@@ -11,7 +11,8 @@ import Link from "next/link"
 
 import { authOptions } from '../api/auth/[...nextauth]/options'
 import { getServerSession } from 'next-auth'
-import TawkToChat from "@/components/TawkTo"
+import TidioChat from "@/components/TidioChat"
+// import TawkToChat from "@/components/TawkTo"
 
 const Markets = async() => {
     let user: string | null = null;
@@ -33,7 +34,8 @@ const Markets = async() => {
                 <HeatMap />
                 <CrossRates />
             </section>
-            <TawkToChat />
+            <TidioChat />
+            {/* <TawkToChat /> */}
             <Footer />
         </main>
     )

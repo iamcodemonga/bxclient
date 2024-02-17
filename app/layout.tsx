@@ -24,6 +24,7 @@ import { getServerSession } from 'next-auth/next'
     <html lang="en">
       <head>
         <link rel="icon" href="/favicon.png" />
+        {/* <script src="//code.tidio.co/opp8uj7g7tacwbzmyilha6yc9krag117.js" async></script> */}
       </head>
       <body className="bg-primary">
         <AuthProvider session={session}>

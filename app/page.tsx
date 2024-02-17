@@ -14,7 +14,8 @@ import CurrencyData from '@/components/CurrencyData'
 
 import { authOptions } from './api/auth/[...nextauth]/options'
 import { getServerSession } from 'next-auth'
-import TawkToChat from '@/components/TawkTo'
+import TidioChat from '@/components/TidioChat'
+// import TawkToChat from '@/components/TawkTo'
 
 export default async function Home() {
   let user: string | null = null;
@@ -38,7 +39,8 @@ export default async function Home() {
         <CurrencyData />
         <Testimony />
         <Footer />
-        <TawkToChat />
+        <TidioChat />
+        {/* <TawkToChat /> */}
       </main>
   )
 }

@@ -1,10 +1,11 @@
 import Banner from '@/components/Banner'
 import Footer from '@/components/Footer'
 import Navbar from '@/components/Navbar'
-import TawkToChat from '@/components/TawkTo'
+// import TawkToChat from '@/components/TawkTo'
 
 import { authOptions } from '../api/auth/[...nextauth]/options'
 import { getServerSession } from 'next-auth'
+import TidioChat from '@/components/TidioChat'
 
 const Privacy = async() => {
     let user: string | null = null;
@@ -35,7 +36,8 @@ const Privacy = async() => {
                     <p>If you do not agree with the above disclaimer, please do not go any further.</p>
                 </div>
             </section>
-            <TawkToChat />
+            <TidioChat />
+            {/* <TawkToChat /> */}
             <Footer />
         </main>
     )

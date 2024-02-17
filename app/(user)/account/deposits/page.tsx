@@ -8,7 +8,8 @@ import { authOptions } from '@/app/api/auth/[...nextauth]/options'
 import { getServerSession } from 'next-auth/next'
 import { redirect } from 'next/navigation'
 import DepositsForm from '@/components/forms/Deposits'
-import TawkToChat from '@/components/TawkTo'
+import TidioChat from '@/components/TidioChat'
+// import TawkToChat from '@/components/TawkTo'
 
 const Deposits = async() => {
     const api = process.env.API_ROOT;
@@ -33,7 +34,8 @@ const Deposits = async() => {
                     <p className='text-gray-700 text-sm text-center'>copyright&copy; botexFinance 2024</p>
                 </footer>
             </main>
-            <TawkToChat />
+            <TidioChat />
+            {/* <TawkToChat /> */}
         </section>
     )
 }
