@@ -7,14 +7,26 @@ import Footer from '@/components/Footer'
 import HowItWorks from '@/components/HowItWorks'
 import Banner from '@/components/Banner'
 
-const Plans = () => {
+import { authOptions } from '../api/auth/[...nextauth]/options'
+import { getServerSession } from 'next-auth'
+import TawkToChat from '@/components/TawkTo'
+
+const Plans = async() => {
+    let user: string | null = null;
+    const session = await getServerSession(authOptions)
+    console.log(session?.user)
+    if (session?.user) {
+      user = session.user.email as string;
+    }
+
     return (
         <main className='overflow-x-hidden'>
-            <Navbar />
+            <Navbar user={user} />
             <Banner photo='https://images.pexels.com/photos/3760067/pexels-photo-3760067.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2' title='Invest In Real Estate.' active='Plans' />
             <Packages />
             <Calculator />
             <HowItWorks />
+            <TawkToChat />
             <Footer />
         </main>
     )

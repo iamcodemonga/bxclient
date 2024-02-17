@@ -11,13 +11,22 @@ import BotexTickerTape from '@/components/Tradingview/BotexTickerTape'
 import WhyChooseUs from '@/components/WhyChooseUs'
 import Footer from '@/components/Footer'
 import CurrencyData from '@/components/CurrencyData'
-import SuccessPopup from '@/components/popups/Success'
-import DepositPopup from '@/components/popups/Deposit'
 
-export default function Home() {
+import { authOptions } from './api/auth/[...nextauth]/options'
+import { getServerSession } from 'next-auth'
+import TawkToChat from '@/components/TawkTo'
+
+export default async function Home() {
+  let user: string | null = null;
+  const session = await getServerSession(authOptions)
+  console.log(session?.user)
+  if (session?.user) {
+    user = session.user.email as string;
+  }
+
   return (
       <main className='overflow-x-hidden'>
-        <Navbar />
+        <Navbar user={user} />
         <Slider />
         <BotexTickerTape />
         <AboutUs />
@@ -28,9 +37,8 @@ export default function Home() {
         <FAQS />
         <CurrencyData />
         <Testimony />
-        {/* <SuccessPopup /> */}
-        {/* <DepositPopup /> */}
         <Footer />
+        <TawkToChat />
       </main>
   )
 }

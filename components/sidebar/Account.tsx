@@ -1,18 +1,27 @@
 "use client"
 
-import React from 'react'
+import React, { FormEvent } from 'react'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
+import { signOut } from 'next-auth/react'
 
 const Account = () => {
 
     const path = usePathname()
+    const router = useRouter();
+
+    const handleLogout = async(e: FormEvent) => {
+        e.preventDefault();
+        await signOut()
+        router.push("/login")
+        return;
+    }
 
     return (
         <aside className='hidden lg:block w-full lg:w-60 fixed left-0 top-0 h-full border-r border-accent'>
             <nav className='flex flex-col justify-around w-full bg-black pb-16 h-full'>
                 <div className='w-full flex justify-between items-center px-5 mt-10'>
-                    <Link href="/" className='text-2xl font-bold text-accent'>BotexFinance</Link>
+                    <Link href="/" className='text-2xl font-bold text-accent'><img src='/logo.png' alt='logo' className='h-28 w-full object-cover' /></Link>
                     <button type="button" className='lg:hidden h-10 w-10 rounded-full mb-2 bg-primary/10 hover:bg-primary/30 flex justify-center items-center text-primary'>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
@@ -52,7 +61,7 @@ const Account = () => {
                             </svg>Settings
                             </Link>
                         </li>
-                        <li className=''><a href="/account/settings" className="text-base flex items-center py-3 px-5 text-red-500">
+                        <li className=''><a href="/account/logout" className="text-base flex items-center py-3 px-5 text-red-500" onClick={handleLogout}>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 mr-1">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15m-3 0-3-3m0 0 3-3m-3 3H15" />
                             </svg>Logout

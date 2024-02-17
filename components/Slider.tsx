@@ -7,6 +7,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/effect-fade';
+import Link from 'next/link';
 
 const Slider = () => {
     return (
@@ -27,12 +28,12 @@ const Slider = () => {
             >
                 <SwiperSlide>
                     <div className='w-full h-screen bg-secondary'>
-                        <div className='absolute top-0 left-0 w-full h-full bg-secondary/30 flex items-end px-5 lg:px-20'>
+                        <div className='absolute top-0 left-0 w-full h-full bg-secondary/60 flex items-end px-5 lg:px-20'>
                             <div className='mb-16 lg:mb-36 w-full lg:w-2/4 space-y-7'>
-                            <h1 className='text-primary text-3xl lg:text-5xl font-bold'>Lorem ipsum dolor sit amet consectetur adipisicing.</h1>
-                            <p className='text-gray-200 text-base'>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Necessitatibus sed iste odit illum distinctio numquam inventore iusto dolorem dolores vitae?</p>
+                            <h1 className='text-primary text-3xl lg:text-5xl font-bold'>Make your first step to financial freedom.</h1>
+                            <p className='text-gray-200 text-base'>We are botex finance, a leading cryptocurrency investment company focused in trading and making huge profits for our customers. Invest in any of our plans and enjoy unimaginable profit.</p>
                             <div className='flex items-center space-x-5'>
-                                <button type="button" className='px-10 py-2 bg-accent text-primary rounded-full hover:bg-accent/70'>Get started</button>
+                                <Link href="/account/deposits" className='px-10 py-2 bg-accent text-primary rounded-full hover:bg-accent/70'>Get started</Link>
                                 {/* <button type="button" className='px-10 py-2 bg-accent text-primary rounded-full hover:bg-accent/70'>Register</button> */}
                             </div>
                             </div>
@@ -42,12 +43,12 @@ const Slider = () => {
                 </SwiperSlide>
                 <SwiperSlide>
                     <div className='w-full h-screen bg-secondary'>
-                        <div className='absolute top-0 left-0 w-full h-full bg-secondary/30 flex items-end px-5 lg:px-20'>
+                        <div className='absolute top-0 left-0 w-full h-full bg-secondary/60 flex items-end px-5 lg:px-20'>
                             <div className='mb-16 lg:mb-36 w-full lg:w-2/4 space-y-7'>
-                            <h1 className='text-primary text-3xl lg:text-5xl font-bold'>Lorem ipsum dolor sit amet consectetur adipisicing.</h1>
-                            <p className='text-gray-200 text-base'>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Necessitatibus sed iste odit illum distinctio numquam inventore iusto dolorem dolores vitae?</p>
+                            <h1 className='text-primary text-3xl lg:text-5xl font-bold'>Your invest, we trade, you make great profits.</h1>
+                            <p className='text-gray-200 text-base'>We are botex finance, a leading cryptocurrency investment company focused in trading and making huge profits for our customers. Invest in any of our plans and enjoy unimaginable profit.</p>
                             <div className='flex items-center space-x-5'>
-                                <button type="button" className='px-10 py-2 bg-accent text-primary rounded-full hover:bg-accent/70'>Get started</button>
+                                <Link href="/account/deposits" className='px-10 py-2 bg-accent text-primary rounded-full hover:bg-accent/70'>Get started</Link>
                                 {/* <button type="button" className='px-10 py-2 bg-accent text-primary rounded-full hover:bg-accent/70'>Register</button> */}
                             </div>
                             </div>
@@ -57,13 +58,12 @@ const Slider = () => {
                 </SwiperSlide>
                 <SwiperSlide>
                     <div className='w-full h-screen bg-secondary'>
-                        <div className='absolute top-0 left-0 w-full h-full bg-secondary/30 flex items-end px-5 lg:px-20'>
+                        <div className='absolute top-0 left-0 w-full h-full bg-secondary/60 flex items-end px-5 lg:px-20'>
                             <div className='mb-16 lg:mb-36 w-full lg:w-2/4 space-y-7'>
-                            <h1 className='text-primary text-3xl lg:text-5xl font-bold'>Lorem ipsum dolor sit amet consectetur adipisicing.</h1>
-                            <p className='text-gray-200 text-base'>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Necessitatibus sed iste odit illum distinctio numquam inventore iusto dolorem dolores vitae?</p>
+                            <h1 className='text-primary text-3xl lg:text-5xl font-bold'>Deposit and monitor your earning progress.</h1>
+                            <p className='text-gray-200 text-base'>We are botex finance, a leading cryptocurrency investment company focused in trading and making huge profits for our customers. Invest in any of our plans and enjoy unimaginable profit.</p>
                             <div className='flex items-center space-x-5'>
-                                <button type="button" className='px-10 py-2 bg-accent text-primary rounded-full hover:bg-accent/70'>Get started</button>
-                                {/* <button type="button" className='px-10 py-2 bg-accent text-primary rounded-full hover:bg-accent/70'>Register</button> */}
+                                <Link href="/account/deposits" className='px-10 py-2 bg-accent text-primary rounded-full hover:bg-accent/70'>Get started</Link>
                             </div>
                             </div>
                         </div>

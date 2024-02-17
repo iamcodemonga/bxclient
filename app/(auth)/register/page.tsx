@@ -1,6 +1,26 @@
+import RegisterForm from "@/components/forms/Register"
 import Link from "next/link"
 
-const Register = () => {
+import { authOptions } from '@/app/api/auth/[...nextauth]/options'
+import { getServerSession } from 'next-auth/next'
+import { redirect } from 'next/navigation'
+
+const Register = async({ searchParams }: { searchParams: { [key: string]: string | string[] | undefined } }) => {
+    let referrer = searchParams.ref as string;
+    if (referrer == undefined || referrer == "") {
+        referrer = "";
+    }
+
+    const session = await getServerSession(authOptions)
+    console.log(session?.user?.email)
+    if (session) {
+        if (session?.user?.email == "admin@botexfinance.com") {
+            redirect('/admin')
+        } else {
+            redirect('/account')
+        }
+    }
+
     return (
         <main className="overflox-x-hidden">
             <div className="fixed top-5 left-5 z-50">
@@ -19,31 +39,7 @@ const Register = () => {
                 </div>
                 <div className="col-span-5 bg-primary whitebgimg h-full lg:h-screen">
                     <div className="flex justify-center lg:items-center w-full h-full pt-28 pb-20">
-                        <form action="" method="post" className="w-72 lg:w-72 space-y-5">
-                            <h1 className="text-3xl font-light text-center">Create Account</h1>
-                            <p className="font-light text-base text-secondary/70 hidde text-center">Sign up, invest in a plan and <span className="text-accent font-bold">EARN </span>massive profit!</p>
-                            <div className="">
-                                <div className='space-y-1'>
-                                    <label htmlFor="" className="text-secondary/70 text-sm">Fullname</label>
-                                    <input type="text" name="" id="" placeholder="Enter your fullname" className='w-full px-3 py-2 bg-slate-200 rounded-md text-sm placeholder:text-xs outline-accent' />
-                                </div>
-                                <div className='space-y-1 mt-3'>
-                                    <label htmlFor="" className="text-secondary/70 text-sm">E-mail address</label>
-                                    <input type="text" name="" id="" placeholder="Input your E-mail address" className='w-full px-3 py-2 bg-slate-200 rounded-md text-sm placeholder:text-xs outline-accent' />
-                                </div>
-                                <div className='space-y-1 mt-3'>
-                                    <label htmlFor="" className="text-secondary/70 text-sm">Username</label>
-                                    <input type="text" name="" id="" placeholder="Input your username" className='w-full px-3 py-2 bg-slate-200 rounded-md text-sm placeholder:text-xs outline-accent' />
-                                </div>
-                                <div className='space-y-1 mt-3'>
-                                    <label htmlFor="" className="text-secondary/70 text-sm">Password</label>
-                                    <input type="password" name="" id="" placeholder="xxxxxxxxxx" className='w-full px-3 py-2 bg-slate-200 rounded-md text-sm placeholder:text-xs outline-accent' />
-                                </div>
-                                <p className="text-xs mt-3 mb-5 block text-slate-500">By signing up, you have hereby agreed to all our terms and conditions!</p>
-                                <button type="submit" className="py-3 w-full bg-accent rounded-md text-sm text-bold text-primary">Register</button>
-                                <p className="text-sm mt-4 text-center">Aready have an account? <Link href="/login" className="text-accent underline">Login</Link></p>
-                            </div>
-                        </form>
+                        <RegisterForm referrer={referrer} />
                     </div>
                 </div>
             </section>

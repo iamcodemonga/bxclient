@@ -1,13 +1,37 @@
-import React from 'react'
+"use client"
+
+import React, { useEffect, useRef } from 'react'
+import { motion, useAnimation, useInView } from 'framer-motion'
 
 const HowItWorks = () => {
+
+    const create = useRef(null);
+    const deposit = useRef(null);
+    const profit = useRef(null);
+    const createInView = useInView(create, { once: true })
+    const depositInView = useInView(deposit, { once: true })
+    const profitInView = useInView(profit, { once: true })
+    const controls = useAnimation()
+
+    useEffect(() => {
+      if (createInView) {
+        controls.start("playcreate")
+      }
+      if (depositInView) {
+        controls.start("playdeposit")
+      }
+      if (profitInView) {
+        controls.start("playprofit")
+      }
+  }, [createInView, depositInView, profitInView])
+
     return (
         <section className="w-full py-36 px-5 lg:px-20 bg-gray-100">
           <h2 className='text-4xl lg:text-7xl font-bold text-center text-secondary'>How It <span className='text-accent'>Works</span></h2>
-          <p className='text-base text-secondary/70 text-center mt-8 mx-auto w-full lg:w-2/3'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam nemo dolores ab dolor, possimus voluptates laborum pariatur accusamus id ea.</p>
+          <p className='text-base text-secondary/70 text-center mt-8 mx-auto w-full lg:w-2/3'>Get involved in our tremendous platform and Invest. We will utilize your money and give you profit in your wallet automatically.</p>
           <div>
-            <div className="lg:grid grid-cols-12 mt-16">
-              <div className='col-span-4 space-y-4 p-7'>
+            <div className="lg:grid grid-cols-12 mt-16 gap-x-10 overflow-hidden">
+              <motion.div className='col-span-4 space-y-4 py-7 px-4' ref={create} variants={{ initcreate: { x: -100, opacity: 0 }, playcreate: { x: 0, opacity: 1 } }} initial="initcreate" animate={controls} transition={{ duration: 0.8 }}>
                 <div className="flex items-center space-x-3 relative">
                 <h3 className='absolute top-0 left-6 text-9xl font-black text-accent/10'>01</h3>
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-10 h-10 text-accent">
@@ -15,9 +39,9 @@ const HowItWorks = () => {
                   </svg>
                   <h4 className='text-xl font-bold text-secondary'>Create Account</h4>
                 </div>
-                <p className='text-base text-secondary/75 w-80'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos quisquam nobis impedit sunt perspiciatis,</p>
-              </div>
-              <div className='col-span-4 space-y-4 p-7 border-t border-b lg:border-t-0 lg:border-b-0 lg:border-r lg:border-l border-slate-300'>
+                <p className='text-base text-secondary/75 w-full'>Fill in your personal details in our secure online application and login to your dashboard.</p>
+              </motion.div>
+              <motion.div className='col-span-4 space-y-4 py-7 px-4 border-t border-b lg:border-t-0 lg:border-b-0 lg:border-r lg:border-l border-slate-300' ref={deposit} variants={{ initdeposit: { scale: 0.5, opacity: 0 }, playdeposit: { scale: 1, opacity: 1 } }} initial="initdeposit" animate={controls} transition={{ duration: 0.5 }}>
                 <div className="flex items-center space-x-3 relative">
                   <h3 className='absolute top-0 left-6 text-9xl font-black text-accent/10'>02</h3>
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-10 h-10 text-accent">
@@ -25,9 +49,9 @@ const HowItWorks = () => {
                   </svg>
                   <h4 className='text-xl font-bold text-secondary'>Deposit</h4>
                 </div>
-                <p className='text-base text-secondary/75 w-80'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos quisquam nobis impedit sunt perspiciatis,</p>
-              </div>
-              <div className='col-span-4 space-y-4 p-7'>
+                <p className='text-base text-secondary/75 w-full'>Invest by depositing into any of our plan using cryptocurrencies(Bitcoin, Ethereum, USDT, BNB).</p>
+              </motion.div>
+              <motion.div className='col-span-4 space-y-4 py-7 px-4' ref={profit} variants={{ initprofit: { x: 100, opacity: 0 }, playprofit: { x: 0, opacity: 1 } }} initial="initprofit" animate={controls} transition={{ duration: 0.8 }}>
                 <div className="flex items-center space-x-3 relative">
                   <h3 className='absolute top-0 left-6 text-9xl font-black text-accent/10'>03</h3>
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-10 h-10 text-accent">
@@ -35,8 +59,8 @@ const HowItWorks = () => {
                   </svg>
                   <h4 className='text-xl font-bold text-secondary'>Get Profit</h4>
                 </div>
-                <p className='text-base text-secondary/75 w-80'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos quisquam nobis impedit sunt perspiciatis,</p>
-              </div>
+                <p className='text-base text-secondary/75 w-full'>Once your payment is approved, you will imediately start making profit on daily basis.</p>
+              </motion.div>
             </div>
           </div>
         </section>

@@ -9,10 +9,21 @@ import MarketInfo from "@/components/Tradingview/MarketInfo"
 import MarketScreener from "@/components/Tradingview/MarketScreener"
 import Link from "next/link"
 
-const Markets = () => {
+import { authOptions } from '../api/auth/[...nextauth]/options'
+import { getServerSession } from 'next-auth'
+import TawkToChat from "@/components/TawkTo"
+
+const Markets = async() => {
+    let user: string | null = null;
+    const session = await getServerSession(authOptions)
+    console.log(session?.user)
+    if (session?.user) {
+      user = session.user.email as string;
+    }
+
     return (
         <main className="overview-x-hidden">
-            <Navbar />
+            <Navbar user={user} />
             <Banner photo='https://images.pexels.com/photos/8353802/pexels-photo-8353802.jpeg?auto=compress&cs=tinysrgb&w=800' title='Market Analysis.' active='Markets' />
             <section className="w-full pt-16 lg:pt-36 pb-16 px-5 lg:px-20 relative whitebgimg space-y-20">
                 <CryptoMarket />
@@ -22,6 +33,7 @@ const Markets = () => {
                 <HeatMap />
                 <CrossRates />
             </section>
+            <TawkToChat />
             <Footer />
         </main>
     )

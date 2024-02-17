@@ -2,8 +2,23 @@ import React from 'react'
 import Sidebar from '@/components/sidebar/Admin'
 import UsersTable from '@/components/tables/Users'
 import Navbar from '@/components/AdminNav'
+import axios from 'axios'
 
-const Admin = () => {
+import { authOptions } from '@/app/api/auth/[...nextauth]/options'
+import { getServerSession } from 'next-auth/next'
+import { redirect } from 'next/navigation'
+
+const Admin = async() => {
+    const api = process.env.API_ROOT;
+    const session = await getServerSession(authOptions)
+    if (session?.user?.email != "admin@botexfinance.com") {
+        redirect('/account');
+    }
+    const url = `${api}/user/?email=${session?.user?.email}`;
+    const { data } = await axios.get(url);
+    const initialRequests = await axios.get(`${api}/user/all`)
+
+
     return (
         <section className='flex w-full h-screen'>
             <Sidebar />
@@ -16,7 +31,7 @@ const Admin = () => {
                         <div className='col-span-12 md:col-span-3 py-5 px-5 md:px-10 rounded-2xl flex justify-between items-center border border-accent bg-accent'>
                             <div>
                                 <p className='mb-1 text-secondary text-xs'>Total Deposits</p>
-                                <h3 className='text-lg text-primary font-bold'>$200,000</h3>
+                                <h3 className='text-lg text-primary font-bold'>${data.metrics.investments.toLocaleString()}</h3>
                             </div>
                             <div>
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-12 h-12 text-gray-900">
@@ -28,7 +43,7 @@ const Admin = () => {
                         <div className='col-span-12 md:col-span-3 py-5 px-5 md:px-10 rounded-2xl bg-accent flex justify-between items-center border border-accent'>
                             <div>
                                 <p className='mb-1 text-secondary text-xs'>Verified deposits</p>
-                                <h3 className='text-lg font-bold text-primary'>$50,000</h3>
+                                <h3 className='text-lg font-bold text-primary'>${data.metrics.seenpayments.toLocaleString()}</h3>
                             </div>
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-12 h-12 text-gray-900">
                                     <path fillRule="evenodd" d="M8.603 3.799A4.49 4.49 0 0 1 12 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 0 1 3.498 1.307 4.491 4.491 0 0 1 1.307 3.497A4.49 4.49 0 0 1 21.75 12a4.49 4.49 0 0 1-1.549 3.397 4.491 4.491 0 0 1-1.307 3.497 4.491 4.491 0 0 1-3.497 1.307A4.49 4.49 0 0 1 12 21.75a4.49 4.49 0 0 1-3.397-1.549 4.49 4.49 0 0 1-3.498-1.306 4.491 4.491 0 0 1-1.307-3.498A4.49 4.49 0 0 1 2.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 0 1 1.307-3.497 4.49 4.49 0 0 1 3.497-1.307Zm7.007 6.387a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z" clipRule="evenodd" />
@@ -37,7 +52,7 @@ const Admin = () => {
                         <div className='col-span-12 md:col-span-3 py-5 px-5 md:px-10 rounded-2xl bg-accent flex justify-between items-center border border-accent'>
                             <div>
                                 <p className='mb-1 text-secondary text-xs'>Total Users</p>
-                                <h3 className='text-lg text-primary font-bold'>200</h3>
+                                <h3 className='text-lg text-primary font-bold'>{data.metrics.investors}</h3>
                             </div>
                             <div>
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-12 h-12 text-gray-900">
@@ -49,7 +64,7 @@ const Admin = () => {
                         <div className='col-span-12 md:col-span-3 py-5 px-5 md:px-10 rounded-2xl bg-accent flex justify-between items-center border border-accent'>
                             <div>
                                 <p className='mb-1 text-secondary text-xs'>Withdrawal Requests</p>
-                                <h3 className='text-lg font-bold text-primary'>57</h3>
+                                <h3 className='text-lg font-bold text-primary'>{data.metrics.requests}</h3>
                             </div>
                             <div>
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-12 h-12 text-gray-900">
@@ -59,7 +74,7 @@ const Admin = () => {
                         </div>
                     </div>
                 </section>
-                <UsersTable />
+                <UsersTable allusers={initialRequests.data.users} />
                 <footer className='pt-10 pb-5'>
                     <p className='text-gray-700 text-sm text-center'>copyright&copy; botexFinance 2024</p>
                 </footer>

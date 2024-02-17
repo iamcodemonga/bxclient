@@ -1,30 +1,55 @@
 import type { Metadata } from 'next'
-// import { Inter } from 'next/font/google'
+import {Toaster } from "react-hot-toast"
+import Progressbar from '@/components/Progressbar'
+import GoogleTranslateScript from '@/components/GoogleTranslateScript'
 import './globals.css'
+import AuthProvider from './context/Providers'
+import { authOptions } from './api/auth/[...nextauth]/options'
+import { getServerSession } from 'next-auth/next'
 
-// const inter = Inter({ subsets: ['latin'] })
+  export const metadata: Metadata = {
+    title: 'Botex Finance - Real estate crypto investment platform',
+    description: 'Invest in real estate and earn massive profits in cryptocurrencies.',
+  }
 
-export const metadata: Metadata = {
-  title: 'Botex Finance - Real estate crypto investment platform',
-  description: 'Invest in real estate and earn massive profits in cryptocurrencies.',
-}
+  export default async function RootLayout({
+    children,
+  }: {
+    children: React.ReactNode
+  }) {
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+  const session = await getServerSession(authOptions);
+
   return (
     <html lang="en">
       <head>
-        <script type="text/javascript" dangerouslySetInnerHTML={{ __html: `
-          function googleTranslateElementInit() {
-            new google.translate.TranslateElement({ pageLanguage: 'en' }, 'google_translate_element');
-          }
-        ` }} />
-        <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async />
+        <link rel="icon" href="/favicon.png" />
       </head>
-      <body className="bg-primary">{children}</body>
+      <body className="bg-primary">
+        <AuthProvider session={session}>
+            <Progressbar>
+              {children}
+            </Progressbar>
+            <Toaster
+              position="top-right"
+              reverseOrder={false}
+              gutter={8}
+              containerClassName=""
+              containerStyle={{}}
+              toastOptions={{
+              // Define default options
+                className: '',
+                duration: 5000,
+                style: {
+                  background: '#363636',
+                  color: '#fff',
+                  fontSize: '12px'
+                }
+              }}
+            />
+            <GoogleTranslateScript />
+        </AuthProvider>
+      </body>
     </html>
   )
 }

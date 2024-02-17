@@ -1,12 +1,22 @@
 import Banner from '@/components/Banner'
 import Footer from '@/components/Footer'
 import Navbar from '@/components/Navbar'
-import React from 'react'
 
-const Contact = () => {
+import { authOptions } from '../api/auth/[...nextauth]/options'
+import { getServerSession } from 'next-auth'
+import TawkToChat from '@/components/TawkTo'
+
+const Contact = async() => {
+    let user: string | null = null;
+    const session = await getServerSession(authOptions)
+    console.log(session?.user)
+    if (session?.user) {
+      user = session.user.email as string;
+    }
+
     return (
         <main className="overflox-x-hidden">
-            <Navbar />
+            <Navbar user={user} />
             <Banner photo='https://images.pexels.com/photos/859264/pexels-photo-859264.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2' title='Reach out to us.' active='Contact' />
             <section className='w-full pt-16 lg:pt-24 pb-16 px-5 lg:px-20 relative bg-accent'>
                 <div className='lg:grid grid-cols-12 gap-x-20 space-y-10 lg:space-y-0 justify-items-center'>
@@ -61,6 +71,7 @@ const Contact = () => {
                     </div>
                 </div>
             </section>
+            <TawkToChat />
             <Footer />
         </main>
     )

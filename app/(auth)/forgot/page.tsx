@@ -1,3 +1,4 @@
+import ForgotPasswordForm from "@/components/forms/ForgotPasswordForm"
 import Link from "next/link"
 
 const Forgot = () => {
@@ -19,18 +20,7 @@ const Forgot = () => {
                 </div>
                 <div className="col-span-5 bg-primary whitebgimg h-screen lg:h-full">
                     <div className="flex justify-center items-center w-full h-full">
-                        <form action="" method="post" className="w-72 lg:w-72 space-y-5">
-                            <h1 className="text-3xl font-light text-center">Forgot Password?</h1>
-                            <p className="font-light text-base text-secondary/70 hidde text-center">We'll send a new AI generated password to your email address.</p>
-                            <div className="">
-                                <div className='space-y-1'>
-                                    <label htmlFor="" className="text-secondary/70 text-sm">E-mail address</label>
-                                    <input type="text" name="" id="" placeholder="Input your username" className='w-full px-3 py-2 bg-slate-200 rounded-md text-sm placeholder:text-xs outline-accent' />
-                                </div>
-                                <button type="submit" className="py-3 w-full bg-accent rounded-md text-sm text-bold text-primary mt-5">Submit</button>
-                                <p className="text-sm mt-4 text-center">Don't have an account? <Link href="/register" className="text-accent underline">Register</Link></p>
-                            </div>
-                        </form>
+                        <ForgotPasswordForm />
                     </div>
                 </div>
             </section>

@@ -1,6 +1,22 @@
+import LoginForm from "@/components/forms/Login"
 import Link from "next/link"
 
-const Login = () => {
+import { authOptions } from '@/app/api/auth/[...nextauth]/options'
+import { getServerSession } from 'next-auth/next'
+import { redirect } from 'next/navigation'
+
+const Login = async() => {
+
+    const session = await getServerSession(authOptions)
+    console.log(session?.user?.email)
+    if (session) {
+        if (session?.user?.email == "admin@botexfinance.com") {
+            redirect('/admin')
+        } else {
+            redirect('/account')
+        }
+    }
+
     return (
         <main className="overflox-x-hidden">
             <div className="fixed top-5 left-5 z-50">
@@ -19,23 +35,7 @@ const Login = () => {
                 </div>
                 <div className="col-span-5 bg-primary whitebgimg h-screen lg:h-full">
                     <div className="flex justify-center items-center w-full h-full">
-                        <form action="" method="post" className="w-72 lg:w-72 space-y-5">
-                            <h1 className="text-3xl font-light text-center">Log into your account</h1>
-                            <p className="font-light text-base text-secondary/70 hidden">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequuntur, enim?</p>
-                            <div className="">
-                                <div className='space-y-1'>
-                                    <label htmlFor="" className="text-secondary/70 text-sm">Username</label>
-                                    <input type="text" name="" id="" placeholder="Input your username" className='w-full px-3 py-2 bg-slate-200 rounded-md text-sm placeholder:text-xs outline-accent' />
-                                </div>
-                                <div className='space-y-1 mt-3'>
-                                    <label htmlFor="" className="text-secondary/70 text-sm">Password</label>
-                                    <input type="password" name="" id="" placeholder="xxxxxxxxxx" className='w-full px-3 py-2 bg-slate-200 rounded-md text-sm placeholder:text-xs outline-accent' />
-                                </div>
-                                <Link href="/forgot" className="text-xs mt-3 mb-5 block text-accent underline text-end">Forgot password?</Link>
-                                <button type="submit" className="py-3 w-full bg-accent rounded-md text-sm text-bold text-primary">Sign in</button>
-                                <p className="text-sm mt-4 text-center">Don't have an account? <Link href="/register" className="text-accent underline">Register</Link></p>
-                            </div>
-                        </form>
+                        <LoginForm />
                     </div>
                 </div>
             </section>

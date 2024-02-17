@@ -1,12 +1,21 @@
 "use client"
 
-import React from 'react'
+import React, { FormEvent } from 'react'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
+import { signOut } from 'next-auth/react'
 
 const AdminBar = () => {
 
     const path = usePathname()
+    const router = useRouter();
+
+    const handleLogout = async(e: FormEvent) => {
+        e.preventDefault();
+        await signOut()
+        router.push("/login")
+        return;
+    }
 
     return (
         <aside className='hidden lg:block w-full lg:w-60 fixed left-0 top-0 h-full border-r border-accent'>
@@ -46,7 +55,7 @@ const AdminBar = () => {
                             </svg>Settings
                             </Link>
                         </li>
-                        <li className=''><a href="/admin/settings" className="text-base flex items-center py-3 px-5 text-red-500">
+                        <li className=''><a href="/admin/logout" className="text-base flex items-center py-3 px-5 text-red-500" onClick={handleLogout}>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 mr-1">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15m-3 0-3-3m0 0 3-3m-3 3H15" />
                             </svg>Logout

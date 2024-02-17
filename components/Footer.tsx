@@ -1,12 +1,11 @@
-// "use client"
+"use client"
 
 import Link from "next/link"
-// import GbottomTranslator from "./GbottomTranslator"
 
 const Footer = () => {
     return (
         <footer className='bg-gray-100 pt-40 pb-10 px-5 lg:px-20 overflow-x-hidden'>
-          <div className='lg:grid lg:grid-cols-12 space-y-20 lg:space-y-0 lg:space-x-20'>
+          <section className='lg:grid lg:grid-cols-12 space-y-20 lg:space-y-0 lg:space-x-20'>
             <div className='col-span-4'>
               <h3 className='text-3xl font-bold'><span>Contact </span><span className='hidden lg:inline-block'>Information</span></h3>
               <p className='flex mt-7'><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 lg:w-6 lg:h-6 mt-1 lg:mt-1 mr-2 text-accent">
@@ -16,22 +15,22 @@ const Footer = () => {
                 <path d="M1.5 8.67v8.58a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3V8.67l-8.928 5.493a3 3 0 0 1-3.144 0L1.5 8.67Z" />
                 <path d="M22.5 6.908V6.75a3 3 0 0 0-3-3h-15a3 3 0 0 0-3 3v.158l9.714 5.978a1.5 1.5 0 0 0 1.572 0L22.5 6.908Z" />
               </svg>
-              <Link href="mailto:admin@botexfinance.com" className='underline hover:text-accent'>management@botexfinance.com</Link></p>
+              <Link href="mailto:management@botexfinance.com" className='underline hover:text-accent'>management@botexfinance.com</Link></p>
             </div>
             <div className='col-span-4'>
               <h3 className='text-3xl font-bold'>Quick Links</h3>
-              <Link href={``} className='hover:underline hover:text-accent mt-7 mb-3 block'>Privacy policy</Link>
-              <Link href={``} className='hover:underline hover:text-accent mt-3 mb-3 block'>FAQs</Link>
-              <Link href={``} className='hover:underline hover:text-accent mt-3 mb-3 block'>Contact</Link>
-              <Link href={``} className='hover:underline hover:text-accent mt-3 mb-3 block'>About Us</Link>
-              <Link href={``} className='hover:underline hover:text-accent mt-3 mb-3 block'>Markets</Link>
-              <div id="google_translate_element" className='w-full'></div>
+              <Link href={`/privacy`} className='hover:underline hover:text-accent mt-7 mb-3 block'>Privacy policy</Link>
+              <Link href={`/about`} className='hover:underline hover:text-accent mt-3 mb-3 block'>FAQs</Link>
+              <Link href={`/contact`} className='hover:underline hover:text-accent mt-3 mb-3 block'>Contact</Link>
+              <Link href={`/about`} className='hover:underline hover:text-accent mt-3 mb-3 block'>About Us</Link>
+              <Link href={`/markets`} className='hover:underline hover:text-accent mt-3 mb-3 block'>Markets</Link>
+              <div id="google_translate_element" className=''></div>
             </div>
             <div className='col-span-4'>
               <h3 className='text-3xl font-bold mb-10'>Certificate</h3>
               <img src={`../certificate.jpeg`} width={200} height={500} alt='certificate' />
             </div>
-          </div>
+          </section>
           <p className='text-gray-700 text-sm mt-36 text-center'>copyright&copy; 2024 BotexFinance. All Rights Reserved</p>
         </footer>
     )

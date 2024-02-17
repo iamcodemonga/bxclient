@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from "next/link"
+import { motion } from 'framer-motion'
 
 const AdminNav = () => {
 
@@ -18,7 +19,7 @@ const AdminNav = () => {
                     <span className='text-xl'>Menu</span>
                 </button>
             </nav>
-            <div className={`z-50 bg-black/90 backdrop-blur-md w-full h-full fixed top-0 left-0 ${open ? "flex" : "hidden"} px-10 items-center`}>
+            <motion.div className={`z-50 bg-black/90 backdrop-blur-md w-full h-full fixed top-0 left-0 ${open ? "flex" : "hidden"} px-10 items-center`} layout>
                 <button type="button" className='flex items-center absolute right-5 top-7 text-gray-300' onClick={() => setOpen(false)}>close<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
                     <path fillRule="evenodd" d="M5.47 5.47a.75.75 0 0 1 1.06 0L12 10.94l5.47-5.47a.75.75 0 1 1 1.06 1.06L13.06 12l5.47 5.47a.75.75 0 1 1-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 0 1-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 0 1 0-1.06Z" clipRule="evenodd" />
                     </svg>
@@ -30,7 +31,7 @@ const AdminNav = () => {
                     <Link href="/admin/settings" className='text-lg text-gray-300 flex items-center'>Settings</Link>
                     <Link href="/" className='text-lg text-primary block text-center w-full bg-red-500 rounded-md py-2'>Logout</Link>
                 </div>
-            </div>
+            </motion.div>
         </>
     )
 }

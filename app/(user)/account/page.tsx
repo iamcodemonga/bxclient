@@ -2,21 +2,34 @@ import React from 'react'
 import Navbar from '@/components/AccountNav'
 import Sidebar from '@/components/sidebar/Account'
 import CryptoTable from '@/components/tables/Crypto'
-import Link from 'next/link'
+import axios from 'axios'
 
-const page = () => {
+import { authOptions } from '@/app/api/auth/[...nextauth]/options'
+import { getServerSession } from 'next-auth/next'
+import { redirect } from 'next/navigation'
+import TawkToChat from '@/components/TawkTo'
+
+const page = async() => {
+    const api = process.env.API_ROOT;
+    const session = await getServerSession(authOptions)
+    if (session?.user?.email == "admin@botexfinance.com") {
+        redirect('/admin');
+    }
+    const url = `${api}/user/?email=${session?.user?.email}`;
+    const { data } = await axios.get(url);
+
     return (
         <section className='flex w-full h-screen'>
             <Sidebar />
             <main className='w-full lg:ml-60 px-5 overflow-x-hidden whitebgimg'>
                 <Navbar />
                 <section className='mt-7 lg:mt-3'>
-                    <h1 className="text-3xl mb-5"> Michael231</h1>
+                    <h1 className="text-3xl mb-5"> { data.profile.username }</h1>
                     <div className='grid grid-cols-12 gap-6 mt-7 lg:mt-0'>
-                        <div className='col-span-12 md:col-span-3 py-5 px-5 md:px-10 rounded-2xl bg-accent flex justify-between items-center border border-accent'>
+                        <div className='col-span-12 md:col-span-4 py-5 px-5 md:px-10 rounded-2xl bg-accent flex justify-between items-center border border-accent'>
                             <div>
-                                <p className='mb-1 text-secondary text-xs'>Balance</p>
-                                <h3 className='text-lg text-primary font-bold'>$87.48M</h3>
+                                <p className='mb-1 text-secondary text-xs'>Total Investments</p>
+                                <h3 className='text-lg text-primary font-bold'>${ data.profile.balance.toLocaleString() }</h3>
                             </div>
                             <div>
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-12 h-12 text-gray-900">
@@ -27,10 +40,21 @@ const page = () => {
                                 </svg>
                             </div>
                         </div>
-                        <div className='col-span-12 md:col-span-3 py-5 px-5 md:px-10 rounded-2xl bg-accent flex justify-between items-center border border-accent'>
+                        <div className='col-span-12 md:col-span-4 py-5 px-5 md:px-10 rounded-2xl bg-accent flex justify-between items-center border border-accent'>
+                            <div>
+                                <p className='mb-1 text-secondary text-xs'>Profit Balance</p>
+                                <h3 className='text-lg text-primary font-bold'>${ data.metrics.withdrawable.toLocaleString() }</h3>
+                            </div>
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-12 h-12 text-gray-900">
+                                    <path fillRule="evenodd" d="M15.22 6.268a.75.75 0 0 1 .968-.431l5.942 2.28a.75.75 0 0 1 .431.97l-2.28 5.94a.75.75 0 1 1-1.4-.537l1.63-4.251-1.086.484a11.2 11.2 0 0 0-5.45 5.173.75.75 0 0 1-1.199.19L9 12.312l-6.22 6.22a.75.75 0 0 1-1.06-1.061l6.75-6.75a.75.75 0 0 1 1.06 0l3.606 3.606a12.695 12.695 0 0 1 5.68-4.974l1.086-.483-4.251-1.632a.75.75 0 0 1-.432-.97Z" clipRule="evenodd" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div className='col-span-12 md:col-span-4 py-5 px-5 md:px-10 rounded-2xl bg-accent flex justify-between items-center border border-accent'>
                             <div>
                                 <p className='mb-1 text-secondary text-xs'>Total Deposit</p>
-                                <h3 className='text-lg text-primary font-bold'>$200,000</h3>
+                                <h3 className='text-lg text-primary font-bold'>${ data.metrics.investments.toLocaleString() }</h3>
                             </div>
                             <div>
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-12 h-12 text-gray-900">
@@ -39,10 +63,10 @@ const page = () => {
                                 </svg>
                             </div>
                         </div>
-                        <div className='col-span-12 md:col-span-3 py-5 px-5 md:px-10 rounded-2xl bg-accent flex justify-between items-center border border-accent'>
+                        <div className='col-span-12 md:col-span-4 py-5 px-5 md:px-10 rounded-2xl bg-accent flex justify-between items-center border border-accent'>
                             <div>
                                 <p className='mb-1 text-secondary text-xs'>Total Withdrawals</p>
-                                <h3 className='text-lg text-primary font-bold'>$10,000</h3>
+                                <h3 className='text-lg text-primary font-bold'>${ data.metrics.withdrawals.toLocaleString() }</h3>
                             </div>
                             <div>
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-12 h-12 text-gray-900">
@@ -51,14 +75,27 @@ const page = () => {
                                 </svg>
                             </div>
                         </div>
-                        <div className='col-span-12 md:col-span-3 py-5 px-5 md:px-10 rounded-2xl bg-accent flex justify-between items-center border border-accent'>
+                        <div className='col-span-12 md:col-span-4 py-5 px-5 md:px-10 rounded-2xl bg-accent flex justify-between items-center border border-accent'>
                             <div>
                                 <p className='mb-1 text-secondary text-xs'>Referral Earnings</p>
-                                <h3 className='text-lg text-primary font-bold'>$2500</h3>
+                                <h3 className='text-lg text-primary font-bold'>${ data.metrics.referral.toLocaleString() }</h3>
                             </div>
                             <div>
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-12 h-12 text-gray-900">
                                     <path d="M4.5 6.375a4.125 4.125 0 1 1 8.25 0 4.125 4.125 0 0 1-8.25 0ZM14.25 8.625a3.375 3.375 0 1 1 6.75 0 3.375 3.375 0 0 1-6.75 0ZM1.5 19.125a7.125 7.125 0 0 1 14.25 0v.003l-.001.119a.75.75 0 0 1-.363.63 13.067 13.067 0 0 1-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 0 1-.364-.63l-.001-.122ZM17.25 19.128l-.001.144a2.25 2.25 0 0 1-.233.96 10.088 10.088 0 0 0 5.06-1.01.75.75 0 0 0 .42-.643 4.875 4.875 0 0 0-6.957-4.611 8.586 8.586 0 0 1 1.71 5.157v.003Z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div className='col-span-12 md:col-span-4 py-5 px-5 md:px-10 rounded-2xl bg-accent flex justify-between items-center border border-accent'>
+                            <div>
+                                <p className='mb-1 text-secondary text-xs'>Today's income</p>
+                                <h3 className='text-lg text-primary font-bold'>${ data.metrics.daily.toLocaleString() }</h3>
+                            </div>
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-12 h-12 text-gray-900">
+                                    <path d="M12 7.5a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5Z" />
+                                    <path fillRule="evenodd" d="M1.5 4.875C1.5 3.839 2.34 3 3.375 3h17.25c1.035 0 1.875.84 1.875 1.875v9.75c0 1.036-.84 1.875-1.875 1.875H3.375A1.875 1.875 0 0 1 1.5 14.625v-9.75ZM8.25 9.75a3.75 3.75 0 1 1 7.5 0 3.75 3.75 0 0 1-7.5 0ZM18.75 9a.75.75 0 0 0-.75.75v.008c0 .414.336.75.75.75h.008a.75.75 0 0 0 .75-.75V9.75a.75.75 0 0 0-.75-.75h-.008ZM4.5 9.75A.75.75 0 0 1 5.25 9h.008a.75.75 0 0 1 .75.75v.008a.75.75 0 0 1-.75.75H5.25a.75.75 0 0 1-.75-.75V9.75Z" clipRule="evenodd" />
+                                    <path d="M2.25 18a.75.75 0 0 0 0 1.5c5.4 0 10.63.722 15.6 2.075 1.19.324 2.4-.558 2.4-1.82V18.75a.75.75 0 0 0-.75-.75H2.25Z" />
                                 </svg>
                             </div>
                         </div>
@@ -69,6 +106,7 @@ const page = () => {
                     <p className='text-gray-700 text-sm text-center'>copyright&copy; botexFinance 2024</p>
                 </footer>
             </main>
+            <TawkToChat />
         </section>
     )
 }
