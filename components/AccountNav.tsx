@@ -1,14 +1,23 @@
 "use client"
 
-import { useState } from 'react'
+import { FormEvent, useState } from 'react'
 import Link from "next/link"
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { motion } from 'framer-motion'
+import { signOut } from 'next-auth/react'
 
 const AccountNav = () => {
 
     const [ open, setOpen ] = useState<boolean>(false)
     const path = usePathname()
+    const router = useRouter();
+
+    const handleLogout = async(e: FormEvent) => {
+        e.preventDefault();
+        await signOut()
+        router.push("/login")
+        return;
+    }
 
     return (
         <>
@@ -32,7 +41,7 @@ const AccountNav = () => {
                     <Link href="/account/withdrawals" className={path == '/account/withdrawals' ? 'text-3xl text-accent flex items-center' : 'text-lg text-gray-300 flex items-center'}>Withdrawals</Link>
                     <Link href="/account/referrals" className={path == '/account/referrals' ? 'text-3xl text-accent flex items-center' : 'text-lg text-gray-300 flex items-center'}>Referrals</Link>
                     <Link href="/account/settings" className={path == '/account/settings' ? 'text-3xl text-accent flex items-center' : 'text-lg text-gray-300 flex items-center'}>Settings</Link>
-                    <Link href="/" className='text-lg text-primary block text-center w-full bg-red-500 rounded-md py-2'>Logout</Link>
+                    <a href="/account/logout" className='text-lg text-primary block text-center w-full bg-red-500 rounded-md py-2' onClick={handleLogout}>Logout</a>
                 </div>
             </motion.div>
         </>

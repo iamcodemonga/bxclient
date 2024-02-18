@@ -1,12 +1,22 @@
 "use client"
 
-import { useState } from 'react'
+import { FormEvent, useState } from 'react'
 import Link from "next/link"
 import { motion } from 'framer-motion'
+import { usePathname, useRouter } from 'next/navigation'
+import { signOut } from 'next-auth/react'
 
 const AdminNav = () => {
-
     const [ open, setOpen ] = useState<boolean>(false)
+    const path = usePathname()
+    const router = useRouter();
+
+    const handleLogout = async(e: FormEvent) => {
+        e.preventDefault();
+        await signOut()
+        router.push("/login")
+        return;
+    }
 
     return (
         <>
@@ -25,11 +35,11 @@ const AdminNav = () => {
                     </svg>
                 </button>
                 <div className='space-y-7 w-full'>
-                    <Link href="/admin" className='text-3xl text-accent flex items-center'>Overview</Link>
-                    <Link href="/admin/deposits" className='text-lg text-gray-300 flex items-center'>Deposits</Link>
-                    <Link href="/admin/withdrawals" className='text-lg text-gray-300 flex items-center'>Withdrawals</Link>
-                    <Link href="/admin/settings" className='text-lg text-gray-300 flex items-center'>Settings</Link>
-                    <Link href="/" className='text-lg text-primary block text-center w-full bg-red-500 rounded-md py-2'>Logout</Link>
+                    <Link href="/admin" className={path == "/admin" ? 'text-3xl text-accent flex items-center' : 'text-lg text-gray-300 flex items-center'}>Overview</Link>
+                    <Link href="/admin/deposits" className={path == "/admin/deposits" ? 'text-3xl text-accent flex items-center' : 'text-lg text-gray-300 flex items-center'}>Deposits</Link>
+                    <Link href="/admin/withdrawals" className={path == "/admin/withdrawals" ? 'text-3xl text-accent flex items-center' : 'text-lg text-gray-300 flex items-center'}>Withdrawals</Link>
+                    <Link href="/admin/settings" className={path == "/admin/settings" ? 'text-3xl text-accent flex items-center' : 'text-lg text-gray-300 flex items-center'}>Settings</Link>
+                    <a href="/admin/logout" className='text-lg text-primary block text-center w-full bg-red-500 rounded-md py-2' onClick={handleLogout}>Logout</a>
                 </div>
             </motion.div>
         </>
