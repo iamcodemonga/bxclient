@@ -181,3 +181,44 @@ export async function approveDeposits({ id }: { id: number }) {
 
     revalidatePath("/admin/deposits");
 }
+
+export async function topupfunds() {
+    try {
+        // const { data } = await axios.post(`${api}/withdrawals/request/${userid}`, { wallet, method, amount })
+        const topupresponse = await fetch(`${api}/wallet/topup`, {
+            method: "PUT",
+            body: JSON.stringify({ }),
+            headers: {
+                "content-type": "application/json",
+            },
+            cache: "no-store"
+        })
+        const topupdata = await topupresponse.json();
+        if (topupdata.error) {
+            throw new Error(topupdata.message);
+        }
+        const payresponse = await fetch(`${api}/wallet/payday`, {
+            method: "PUT",
+            body: JSON.stringify({ }),
+            headers: {
+                "content-type": "application/json",
+            },
+            cache: "no-store"
+        })
+        await payresponse.json();
+        // const result = await axios.put(`${api}/wallet/topup`)
+        // if (result.data.status == 200) {
+        //     console.log(result.data.message);
+        //     // payroll clearance runs
+        //     const data = await axios.put(`${api}/wallet/payday`)
+        //     console.log(data.data.message)
+        // }
+    } catch (error) {
+        return {
+            error: getErrorMessage(error)
+        }
+    }
+
+    revalidatePath("/admin");
+    // redirect('/admin')
+}

@@ -6,6 +6,7 @@ import axios from 'axios'
 import { authOptions } from '@/app/api/auth/[...nextauth]/options'
 import { getServerSession } from 'next-auth/next'
 import { redirect } from 'next/navigation'
+import TopUpForm from '@/components/forms/TopUp'
 
 const AllDeposits = async() => {
     const api = process.env.API_ROOT;
@@ -22,6 +23,7 @@ const AllDeposits = async() => {
             <Sidebar />
             <main className='w-full lg:ml-60 px-5 overflow-x-hidden whitebgimg'>
                 <Navbar />
+                {/* <TopUpForm /> */}
                 <DepositsTable alldeposits={initialRequests.data.deposits} />
                 <footer className='pt-10 pb-5'>
                     <p className='text-gray-700 text-sm text-center'>copyright&copy; botexFinance 2024</p>

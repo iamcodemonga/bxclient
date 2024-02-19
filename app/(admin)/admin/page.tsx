@@ -7,6 +7,7 @@ import axios from 'axios'
 import { authOptions } from '@/app/api/auth/[...nextauth]/options'
 import { getServerSession } from 'next-auth/next'
 import { redirect } from 'next/navigation'
+import TopUpForm from '@/components/forms/TopUp'
 
 const Admin = async() => {
     const api = process.env.API_ROOT;
@@ -25,6 +26,7 @@ const Admin = async() => {
             {/* <Menu /> */}
             <main className='w-full lg:ml-60 px-5 overflow-x-hidden whitebgimg'>
                 <Navbar />
+                <TopUpForm />
                 <section className='mt-7 lg:mt-3'>
                     {/* <h1 className="text-3xl mb-5"> Michael231</h1> */}
                     <div className='grid grid-cols-12 gap-6 mt-7 lg:mt-0'>
