@@ -27,8 +27,9 @@ const Footer = () => {
               <div id="google_translate_element" className=''></div>
             </div>
             <div className='col-span-4'>
-              <h3 className='text-3xl font-bold mb-10'>Certificate</h3>
-              <img src={`../certificate.jpeg`} width={200} height={500} alt='certificate' />
+              {/* <img src="/logo.png" className="h-0 object-cover" alt="logo" /> */}
+              <h3 className="text-accent text-3xl font-extrabold mb-7">BOTEX FINANCE</h3>
+              <p className=''>We are botex finance, a leading cryptocurrency investment company focused in trading and making huge profits for our customers. Invest in any of our plans and enjoy unimaginable profit.</p>
             </div>
           </section>
           <p className='text-gray-700 text-sm mt-36 text-center'>copyright&copy; 2024 BotexFinance. All Rights Reserved</p>
