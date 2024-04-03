@@ -18,7 +18,7 @@ const UsersTable = ({ allusers }: { allusers: { id: number, fullname: string, us
         if (limit > allusers.length) {
             return;
         }
-        setLimit(prev => prev+2)
+        setLimit(prev => prev+10)
         return;
     }
 
@@ -67,7 +67,7 @@ const UsersTable = ({ allusers }: { allusers: { id: number, fullname: string, us
                         </tr>
                     </thead>
                     <tbody>
-                        {!query ? allusers.length > 0 ? allusers.slice(0, 10).map((user: { id: number, fullname: string, username: string, email: string, referrer: number, balance: number, profitbalance: number}, index: number) =>  <tr className='border-t border-accent' key={index}>
+                        {!query ? allusers.length > 0 ? allusers.slice(0, limit).map((user: { id: number, fullname: string, username: string, email: string, referrer: number, balance: number, profitbalance: number}, index: number) =>  <tr className='border-t border-accent' key={index}>
                             <td className='whitespace-nowrap p-3 text-center'>{index+1}</td>
                             <td className='whitespace-nowrap p-3 text-center'>{user.fullname}</td>
                             <td className='whitespace-nowrap p-3 text-center'>{user.username}</td>

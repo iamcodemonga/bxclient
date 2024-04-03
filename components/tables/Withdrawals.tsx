@@ -15,7 +15,7 @@ const Withdrawals = ({ allwithdrawals }: { allwithdrawals: Array<{ id: number, i
         if (limit > allwithdrawals.length) {
             return;
         }
-        setLimit(prev => prev+2)
+        setLimit(prev => prev+10)
         return;
     }
 

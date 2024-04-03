@@ -10,7 +10,7 @@ const UserWithdrawals = ({ initial }: { initial: Array<{ id: number, investor: n
         if (limit > initial.length) {
             return;
         }
-        setLimit(prev => prev+2)
+        setLimit(prev => prev+10)
         return;
     }
 

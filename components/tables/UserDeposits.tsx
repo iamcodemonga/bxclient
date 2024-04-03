@@ -10,7 +10,7 @@ const UserDeposits = ({ alldeposits }: { alldeposits: { id: number, package: str
         if (limit > alldeposits.length) {
             return;
         }
-        setLimit(prev => prev+2)
+        setLimit(prev => prev+10)
         return;
     }
 

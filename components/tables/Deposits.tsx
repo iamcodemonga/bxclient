@@ -25,7 +25,7 @@ const Deposits = ({ alldeposits }: { alldeposits: { id: number, package: string,
         if (limit > alldeposits.length) {
             return;
         }
-        setLimit(prev => prev+2)
+        setLimit(prev => prev+10)
         return;
     }
 

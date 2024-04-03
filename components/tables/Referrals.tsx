@@ -10,7 +10,7 @@ const Referrals = ({ allbonuses }: { allbonuses: { id: number, fullname: string,
         if (limit > allbonuses.length) {
             return;
         }
-        setLimit(prev => prev+2)
+        setLimit(prev => prev+10)
         return;
     }
 
